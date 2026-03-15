@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computing Fundamentals - Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>📚 Learning Hub</h2>
+            <button class="toggle-sidebar" onclick="toggleSidebar()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#home" onclick="scrollToSection('#home')"><i class="fas fa-home"></i> Home</a></li>
+                <li>
+                    <a href="#io" class="menu-title" onclick="toggleMenu(event, 'io-menu')"><i class="fas fa-exchange-alt"></i> I/O Communication <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu" id="io-menu">
+                        <li><a href="#io-intro" onclick="scrollToSection('#io-intro')">Introduction</a></li>
+                        <li><a href="#io-concepts" onclick="scrollToSection('#io-concepts')">Basic Concepts</a></li>
+                        <li><a href="#io-devices" onclick="scrollToSection('#io-devices')">Device Types</a></li>
+                        <li><a href="#io-methods" onclick="scrollToSection('#io-methods')">Communication Methods</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#unicode" class="menu-title" onclick="toggleMenu(event, 'unicode-menu')"><i class="fas fa-font"></i> Unicode Encoding <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu" id="unicode-menu">
+                        <li><a href="#unicode-intro" onclick="scrollToSection('#unicode-intro')">What is Unicode?</a></li>
+                        <li><a href="#unicode-history" onclick="scrollToSection('#unicode-history')">History</a></li>
+                        <li><a href="#unicode-formats" onclick="scrollToSection('#unicode-formats')">Encoding Formats</a></li>
+                        <li><a href="#unicode-blocks" onclick="scrollToSection('#unicode-blocks')">Character Blocks</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#network" class="menu-title" onclick="toggleMenu(event, 'network-menu')"><i class="fas fa-sitemap"></i> Network Architecture <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu" id="network-menu">
+                        <li><a href="#network-intro" onclick="scrollToSection('#network-intro')">Overview</a></li>
+                        <li><a href="#client-server" onclick="scrollToSection('#client-server')">Client-Server</a></li>
+                        <li><a href="#peer-to-peer" onclick="scrollToSection('#peer-to-peer')">Peer-to-Peer</a></li>
+                        <li><a href="#network-compare" onclick="scrollToSection('#network-compare')">Comparison</a></li>
+                    </ul>
+                </li>
+                <li><a href="#tools" onclick="scrollToSection('#tools')"><i class="fas fa-tools"></i> Interactive Tools</a></li>
+                <li><a href="#quiz" onclick="scrollToSection('#quiz')"><i class="fas fa-question-circle"></i> Quiz</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">📚 TechHub Learning</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Computing Fundamentals</h1>
+                <p>Master I/O Communication, Unicode Encoding & Network Architectures</p>
+                <button class="btn-primary" onclick="document.getElementById('io').scrollIntoView({behavior: 'smooth'})">
+                    Start Learning ↓
+                </button>
+            </div>
+        </section>
+
+        <!-- I/O Communication Section -->
+        <section id="io" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>📡 I/O Communication</h2>
+                    <p>How computers communicate with external devices</p>
+                </div>
+
+                <div id="io-intro" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> What is I/O Communication?</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Input/Output (I/O) communication is the process of transferring data between a computer and external devices. It allows computers to interact with the real world!</p>
+                        <div class="info-section">
+                            <h4>Why is I/O Important?</h4>
+                            <ul class="list-items">
+                                <li>Without I/O, computers would be completely isolated</li>
+                                <li>Enables user interaction and data exchange</li>
+                                <li>Critical for all computing systems</li>
+                                <li>Affects overall system performance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="io-concepts" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Basic Concepts</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="concept-grid">
+                            <div class="concept-item">
+                                <h4>🔌 Input Devices</h4>
+                                <p>Keyboard, Mouse, Camera, Microphone - devices that send data to the computer</p>
+                            </div>
+                            <div class="concept-item">
+                                <h4>💻 Output Devices</h4>
+                                <p>Monitor, Printer, Speaker - devices that display or present data from computer</p>
+                            </div>
+                            <div class="concept-item">
+                                <h4>💾 Storage Devices</h4>
+                                <p>Hard Drive, SSD, USB - devices that store data for long-term use</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="io-devices" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Types of I/O Devices</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Device Type</th>
+                                        <th>Examples</th>
+                                        <th>Purpose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row-1">
+                                        <td><strong>Input Devices</strong></td>
+                                        <td>Keyboard, Mouse, Microphone, Camera</td>
+                                        <td>Send data to computer</td>
+                                    </tr>
+                                    <tr class="row-2">
+                                        <td><strong>Output Devices</strong></td>
+                                        <td>Monitor, Printer, Speaker, Headphones</td>
+                                        <td>Display/Present data</td>
+                                    </tr>
+                                    <tr class="row-3">
+                                        <td><strong>Storage Devices</strong></td>
+                                        <td>Hard Drive, SSD, USB, Memory Card</td>
+                                        <td>Store and retrieve data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="io-methods" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> I/O Communication Methods</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="method-grid">
+                            <div class="method-item">
+                                <h4>⚡ Programmed I/O</h4>
+                                <p><strong>How:</strong> CPU directly checks device status</p>
+                                <p><strong>Pros:</strong> Simple to implement</p>
+                                <p><strong>Cons:</strong> Wastes CPU time</p>
+                            </div>
+                            <div class="method-item">
+                                <h4>🔔 Interrupt-Driven I/O</h4>
+                                <p><strong>How:</strong> Device interrupts CPU when ready</p>
+                                <p><strong>Pros:</strong> Better CPU utilization</p>
+                                <p><strong>Cons:</strong> More complex</p>
+                            </div>
+                            <div class="method-item">
+                                <h4>🚀 DMA (Direct Memory Access)</h4>
+                                <p><strong>How:</strong> Device transfers data directly to memory</p>
+                                <p><strong>Pros:</strong> Very fast, CPU free</p>
+                                <p><strong>Cons:</strong> Hardware complex</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-diagram-project"></i> I/O System Flow</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="diagram-small">
+                            <svg viewBox="0 0 800 150" class="flow-svg">
+                                <rect x="20" y="40" width="100" height="60" fill="#FFD1DC" stroke="#FF69B4" stroke-width="2" rx="5"/>
+                                <text x="70" y="75" text-anchor="middle" font-size="14" font-weight="bold">Input</text>
+                                <path d="M 120 70 L 150 70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <rect x="150" y="40" width="100" height="60" fill="#B4A7FF" stroke="#667eea" stroke-width="2" rx="5"/>
+                                <text x="200" y="75" text-anchor="middle" font-size="14" font-weight="bold">CPU</text>
+                                <path d="M 250 70 L 280 70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <rect x="280" y="40" width="100" height="60" fill="#A5D6A7" stroke="#4CAF50" stroke-width="2" rx="5"/>
+                                <text x="330" y="75" text-anchor="middle" font-size="14" font-weight="bold">Memory</text>
+                                <path d="M 380 70 L 410 70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <rect x="410" y="40" width="100" height="60" fill="#FFE0B2" stroke="#FF9800" stroke-width="2" rx="5"/>
+                                <text x="460" y="75" text-anchor="middle" font-size="14" font-weight="bold">Output</text>
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unicode Section -->
+        <section id="unicode" class="section alt-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🌍 Unicode Encoding</h2>
+                    <p>Universal character representation for all languages</p>
+                </div>
+
+                <div id="unicode-intro" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> What is Unicode?</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Unicode is an international standard that assigns a unique number (code point) to every character in every language. It supports over 149,000 characters from 200+ languages!</p>
+                        <div class="info-section">
+                            <h4>Key Facts:</h4>
+                            <ul class="list-items">
+                                <li>Industry standard for text encoding</li>
+                                <li>Supports all major writing systems</li>
+                                <li>Mandatory for modern web (HTML5)</li>
+                                <li>Range: U+0000 to U+10FFFF</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="unicode-history" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> History of Unicode</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline-simple">
+                            <div class="timeline-dot">1989 - Unicode Created</div>
+                            <div class="timeline-line"></div>
+                            <div class="timeline-dot">1991 - Unicode 1.0 Released</div>
+                            <div class="timeline-line"></div>
+                            <div class="timeline-dot">1996-2000 - Rapid Expansion</div>
+                            <div class="timeline-line"></div>
+                            <div class="timeline-dot">2010-2026 - Web Standard</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="unicode-formats" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Unicode Encoding Formats</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="encoding-grid">
+                            <div class="encoding-item">
+                                <h4>UTF-8</h4>
+                                <p><strong>Bytes:</strong> 1-4 per character</p>
+                                <p><strong>Used In:</strong> Web, HTML, JSON</p>
+                                <p><strong>Example:</strong> A = 1 byte, 中 = 3 bytes</p>
+                            </div>
+                            <div class="encoding-item">
+                                <h4>UTF-16</h4>
+                                <p><strong>Bytes:</strong> 2-4 per character</p>
+                                <p><strong>Used In:</strong> Java, C#, Windows</p>
+                                <p><strong>Example:</strong> Good for mixed languages</p>
+                            </div>
+                            <div class="encoding-item">
+                                <h4>UTF-32</h4>
+                                <p><strong>Bytes:</strong> 4 per character</p>
+                                <p><strong>Used In:</strong> Internal processing</p>
+                                <p><strong>Example:</strong> Simple but memory-heavy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="unicode-blocks" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Character Blocks from Different Languages</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="char-grid">
+                            <div class="char-item">
+                                <h4>🔤 English (Latin)</h4>
+                                <p>ABCDEFGHIJKLM</p>
+                                <p>NOPQRSTUVWXYZ</p>
+                            </div>
+                            <div class="char-item">
+                                <h4>🇬🇷 Greek</h4>
+                                <p>ΑΒΓΔΕΖΗΘΙΚΛΜΝ</p>
+                            </div>
+                            <div class="char-item">
+                                <h4>🇷🇺 Russian (Cyrillic)</h4>
+                                <p>АБВГДЕЖЗИЙКЛ</p>
+                            </div>
+                            <div class="char-item">
+                                <h4>🇸🇦 Arabic</h4>
+                                <p>ا ب ج د ه و ز ح</p>
+                            </div>
+                            <div class="char-item">
+                                <h4>🇨🇳 Chinese (Hanzi)</h4>
+                                <p>汉字 学习 中文</p>
+                            </div>
+                            <div class="char-item">
+                                <h4>😀 Emoji</h4>
+                                <p>😀 😃 ❤️ 🚀 ⭐</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-diagram-project"></i> Unicode Encoding Process</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="diagram-small">
+                            <svg viewBox="0 0 600 80" class="flow-svg">
+                                <rect x="20" y="10" width="80" height="60" fill="#FFD1DC" stroke="#FF69B4" stroke-width="2" rx="4"/>
+                                <text x="60" y="45" text-anchor="middle" font-size="16" font-weight="bold">A</text>
+                                <text x="60" y="65" text-anchor="middle" font-size="10">Character</text>
+                                <path d="M 100 40 L 130 40" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="130" y="10" width="80" height="60" fill="#B4A7FF" stroke="#667eea" stroke-width="2" rx="4"/>
+                                <text x="170" y="45" text-anchor="middle" font-size="14" font-weight="bold">U+0041</text>
+                                <text x="170" y="65" text-anchor="middle" font-size="10">Code Point</text>
+                                <path d="M 210 40 L 240 40" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="240" y="10" width="80" height="60" fill="#A5D6A7" stroke="#4CAF50" stroke-width="2" rx="4"/>
+                                <text x="280" y="45" text-anchor="middle" font-size="14" font-weight="bold">0x41</text>
+                                <text x="280" y="65" text-anchor="middle" font-size="10">UTF-8 Bytes</text>
+                                <path d="M 320 40 L 350 40" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="350" y="10" width="80" height="60" fill="#FFE0B2" stroke="#FF9800" stroke-width="2" rx="4"/>
+                                <text x="390" y="45" text-anchor="middle" font-size="16" font-weight="bold">A</text>
+                                <text x="390" y="65" text-anchor="middle" font-size="10">Display</text>
+                                <defs>
+                                    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Architecture Section -->
+        <section id="network" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🌐 Network Architecture</h2>
+                    <p>Client-Server vs Peer-to-Peer Systems</p>
+                </div>
+
+                <div id="network-intro" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Network Architecture Overview</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Network architecture defines how computers connect and communicate to share resources. Two primary models dominate: Client-Server and Peer-to-Peer.</p>
+                    </div>
+                </div>
+
+                <div id="client-server" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> 🖥️ Client-Server Architecture</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>One central server provides resources to multiple clients.</p>
+                        <h4 class="subtitle">Characteristics:</h4>
+                        <ul class="list-items">
+                            <li>✓ Centralized control and management</li>
+                            <li>✓ Strong security mechanisms</li>
+                            <li>✓ Easy data backup and recovery</li>
+                            <li>✗ Single point of failure</li>
+                            <li>✗ Server becomes bottleneck</li>
+                        </ul>
+                        <h4 class="subtitle">Real-World Examples:</h4>
+                        <div class="examples-simple">
+                            <div class="ex-item">✉️ Email (Gmail, Outlook)</div>
+                            <div class="ex-item">🌐 Websites (Google, Facebook)</div>
+                            <div class="ex-item">📁 Cloud Storage (Dropbox)</div>
+                            <div class="ex-item">🏦 Banking Systems</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="peer-to-peer" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> 💻 Peer-to-Peer (P2P) Architecture</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>All devices have equal capabilities and connect directly without central authority.</p>
+                        <h4 class="subtitle">Characteristics:</h4>
+                        <ul class="list-items">
+                            <li>✓ No single point of failure</li>
+                            <li>✓ Highly scalable</li>
+                            <li>✓ Lower infrastructure cost</li>
+                            <li>✗ Complex to manage</li>
+                            <li>✗ Security challenges</li>
+                        </ul>
+                        <h4 class="subtitle">Real-World Examples:</h4>
+                        <div class="examples-simple">
+                            <div class="ex-item">⚡ BitTorrent</div>
+                            <div class="ex-item">💰 Bitcoin/Blockchain</div>
+                            <div class="ex-item">📱 Skype (P2P Calls)</div>
+                            <div class="ex-item">🌍 IPFS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="network-compare" class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-chevron-down"></i> Detailed Comparison</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Client-Server</th>
+                                        <th>Peer-to-Peer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row-1">
+                                        <td><strong>Architecture</strong></td>
+                                        <td>Centralized</td>
+                                        <td>Decentralized</td>
+                                    </tr>
+                                    <tr class="row-2">
+                                        <td><strong>Server Required</strong></td>
+                                        <td>Yes - mandatory</td>
+                                        <td>No - not needed</td>
+                                    </tr>
+                                    <tr class="row-3">
+                                        <td><strong>Scalability</strong></td>
+                                        <td>Good for many clients</td>
+                                        <td>Excellent as network grows</td>
+                                    </tr>
+                                    <tr class="row-1">
+                                        <td><strong>Reliability</strong></td>
+                                        <td>Single point of failure</td>
+                                        <td>Highly fault tolerant</td>
+                                    </tr>
+                                    <tr class="row-2">
+                                        <td><strong>Security</strong></td>
+                                        <td>Easier to control</td>
+                                        <td>More challenging</td>
+                                    </tr>
+                                    <tr class="row-3">
+                                        <td><strong>Cost</strong></td>
+                                        <td>High (expensive servers)</td>
+                                        <td>Low (use existing machines)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3><i class="fas fa-diagram-project"></i> Network Architecture Models</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="diagram-grid">
+                            <div class="diagram-small">
+                                <h4 style="text-align: center; margin-bottom: 1rem;">Client-Server Model</h4>
+                                <svg viewBox="0 0 250 180" class="network-svg">
+                                    <rect x="85" y="10" width="80" height="50" fill="#FFE0B2" stroke="#FF9800" stroke-width="2" rx="4"/>
+                                    <text x="125" y="40" text-anchor="middle" font-size="12" font-weight="bold">Server</text>
+                                    <circle cx="50" cy="110" r="20" fill="#BBDEFB" stroke="#1976D2" stroke-width="2"/>
+                                    <text x="50" y="115" text-anchor="middle" font-size="10">C</text>
+                                    <circle cx="125" cy="140" r="20" fill="#BBDEFB" stroke="#1976D2" stroke-width="2"/>
+                                    <text x="125" y="145" text-anchor="middle" font-size="10">C</text>
+                                    <circle cx="200" cy="110" r="20" fill="#BBDEFB" stroke="#1976D2" stroke-width="2"/>
+                                    <text x="200" y="115" text-anchor="middle" font-size="10">C</text>
+                                    <line x1="110" y1="60" x2="65" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="125" y1="60" x2="125" y2="120" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="140" y1="60" x2="185" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                </svg>
+                            </div>
+
+                            <div class="diagram-small">
+                                <h4 style="text-align: center; margin-bottom: 1rem;">Peer-to-Peer Model</h4>
+                                <svg viewBox="0 0 250 180" class="network-svg">
+                                    <circle cx="60" cy="50" r="20" fill="#C8E6C9" stroke="#388E3C" stroke-width="2"/>
+                                    <text x="60" y="55" text-anchor="middle" font-size="10">P</text>
+                                    <circle cx="190" cy="50" r="20" fill="#C8E6C9" stroke="#388E3C" stroke-width="2"/>
+                                    <text x="190" y="55" text-anchor="middle" font-size="10">P</text>
+                                    <circle cx="60" cy="130" r="20" fill="#C8E6C9" stroke="#388E3C" stroke-width="2"/>
+                                    <text x="60" y="135" text-anchor="middle" font-size="10">P</text>
+                                    <circle cx="190" cy="130" r="20" fill="#C8E6C9" stroke="#388E3C" stroke-width="2"/>
+                                    <text x="190" y="135" text-anchor="middle" font-size="10">P</text>
+                                    <line x1="80" y1="50" x2="170" y2="50" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="60" y1="70" x2="60" y2="110" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="190" y1="70" x2="190" y2="110" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="80" y1="130" x2="170" y2="130" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="75" y1="55" x2="175" y2="125" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                    <line x1="175" y1="55" x2="75" y2="125" stroke="#999" stroke-width="1.5" stroke-dasharray="3"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="section alt-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🛠️ Interactive Tools</h2>
+                    <p>Hands-on learning and exploration</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Unicode Converter</h3>
+                        <p>Convert any character to Unicode code point</p>
+                        <div class="tool-form">
+                            <input type="text" id="charInput" placeholder="Enter a character" maxlength="1" class="tool-input">
+                            <button class="btn-tool" onclick="convertChar()">Convert</button>
+                        </div>
+                        <div id="charResult" class="tool-result"></div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Text Encoder</h3>
+                        <p>See how text is encoded in UTF-8</p>
+                        <div class="tool-form">
+                            <input type="text" id="textInput" placeholder="Enter text..." class="tool-input">
+                            <button class="btn-tool" onclick="encodeText()">Encode</button>
+                        </div>
+                        <div id="textResult" class="tool-result"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>✅ Quick Quiz</h2>
+                    <p>Test your knowledge</p>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-item">
+                        <h4>1. What does I/O stand for?</h4>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> Input/Output</label>
+                            <label><input type="radio" name="q1"> Internet/Online</label>
+                            <label><input type="radio" name="q1"> Internal/Optional</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <h4>2. Which encoding is most used on the web?</h4>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> UTF-32</label>
+                            <label><input type="radio" name="q2"> UTF-8</label>
+                            <label><input type="radio" name="q2"> UTF-16</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <h4>3. Which architecture has a single point of failure?</h4>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> Peer-to-Peer</label>
+                            <label><input type="radio" name="q3"> Client-Server</label>
+                            <label><input type="radio" name="q3"> Both equally</label>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="submitQuiz()">Submit Quiz</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 FOC Microproject By Group-7 | Computing Fundamentals</p>
+        <p>Interactive Learning Platform</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
