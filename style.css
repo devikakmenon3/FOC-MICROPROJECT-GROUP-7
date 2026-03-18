@@ -23,12 +23,13 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #fff5f7 0%, #f0f7ff 100%);
     color: var(--text);
     line-height: 1.6;
     transition: all 0.3s ease;
 }
+
 
 body.dark-mode {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
