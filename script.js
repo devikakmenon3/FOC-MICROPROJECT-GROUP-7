@@ -38,15 +38,34 @@ function toggleCard(header) {
 
 // Initialize cards - COLLAPSE by default
 document.addEventListener('DOMContentLoaded', function() {
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    const themeButton = document.querySelector('.theme-toggle');
+    const icon = themeButton.querySelector('i');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        document.body.classList.remove('dark-mode');
+        icon.classList.add('fa-moon');
+        icon.classList.remove('fa-sun');
+    }
+    
     const cards = document.querySelectorAll('.card-box');
     cards.forEach(card => {
         const body = card.querySelector('.card-body');
         body.style.display = 'none';
-        const icon = card.querySelector('.card-header i');
-        if (icon) {
-            icon.style.transform = 'rotate(0deg)';
+        const cardIcon = card.querySelector('.card-header i');
+        if (cardIcon && !cardIcon.classList.contains('fa-moon') && !cardIcon.classList.contains('fa-sun')) {
+            cardIcon.style.transform = 'rotate(0deg)';
         }
     });
+
+    // Initialize feedback system
+    initializeFeedbackSystem();
+    loadFeedbackStats();
 });
 
 // Unicode Converter
@@ -152,7 +171,7 @@ document.addEventListener('keypress', function(e) {
     }
 });
 
-// Theme Toggle (Dark Mode)
+// Theme Toggle (Dark Mode) with localStorage persistence
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
     const themeButton = document.querySelector('.theme-toggle');
@@ -161,8 +180,179 @@ function toggleTheme() {
     if (document.body.classList.contains('dark-mode')) {
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
     } else {
         icon.classList.remove('fa-sun');
         icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
     }
+}
+
+// ================================
+// FEEDBACK SYSTEM (LOCAL ONLY)
+// ================================
+
+function initializeFeedbackSystem() {
+    const stars = document.querySelectorAll('.star');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    const charCount = document.getElementById('charCount');
+
+    // Star rating functionality
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const ratingValue = this.getAttribute('data-value');
+            document.getElementById('ratingValue').value = ratingValue;
+            
+            // Update stars display
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') <= ratingValue) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            // Update rating text
+            const ratingTexts = {
+                1: '😞 Poor',
+                2: '😐 Fair',
+                3: '😊 Good',
+                4: '😄 Very Good',
+                5: '🤩 Excellent'
+            };
+            document.getElementById('ratingText').textContent = ratingTexts[ratingValue];
+        });
+
+        // Hover effect
+        star.addEventListener('mouseover', function() {
+            const hoverValue = this.getAttribute('data-value');
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') <= hoverValue) {
+                    s.style.color = '#FFB3D9';
+                } else {
+                    s.style.color = document.body.classList.contains('dark-mode') ? '#5a4f6d' : '#ddd';
+                }
+            });
+        });
+    });
+
+    // Mouse leave event for stars
+    document.getElementById('starRating').addEventListener('mouseleave', function() {
+        const currentRating = document.getElementById('ratingValue').value;
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') <= currentRating && currentRating > 0) {
+                s.style.color = '#FFB3D9';
+            } else {
+                s.style.color = document.body.classList.contains('dark-mode') ? '#5a4f6d' : '#ddd';
+            }
+        });
+    });
+
+    // Character counter for textarea
+    feedbackMessage.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+        if (this.value.length > 500) {
+            this.value = this.value.substring(0, 500);
+            charCount.textContent = '500';
+        }
+    });
+
+    // Form submission handler (LOCAL STORAGE ONLY)
+    feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const rating = document.getElementById('ratingValue').value;
+        if (rating === '0' || rating === '') {
+            alert('Please select a star rating!');
+            return;
+        }
+
+        const category = document.getElementById('category').value;
+        if (!category) {
+            alert('Please select a feedback category!');
+            return;
+        }
+
+        const message = document.getElementById('feedbackMessage').value;
+        if (!message.trim()) {
+            alert('Please enter your feedback!');
+            return;
+        }
+
+        const email = document.getElementById('feedbackEmail').value;
+        const timestamp = new Date().toLocaleString();
+
+        // Collect feedback data
+        const feedbackData = {
+            rating: rating,
+            category: category,
+            email: email,
+            message: message,
+            timestamp: timestamp
+        };
+
+        // Save to localStorage
+        let allFeedback = JSON.parse(localStorage.getItem('allFeedback')) || [];
+        allFeedback.push(feedbackData);
+        localStorage.setItem('allFeedback', JSON.stringify(allFeedback));
+
+        // Show success message
+        document.getElementById('feedbackForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+
+        // Update stats
+        loadFeedbackStats();
+
+        // Scroll to success message
+        document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
+function resetFeedbackForm() {
+    document.getElementById('feedbackForm').style.display = 'block';
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('feedbackForm').reset();
+    document.getElementById('ratingValue').value = '0';
+    document.getElementById('charCount').textContent = '0';
+    
+    document.querySelectorAll('.star').forEach(star => {
+        star.classList.remove('active');
+        star.style.color = document.body.classList.contains('dark-mode') ? '#5a4f6d' : '#ddd';
+    });
+    document.getElementById('ratingText').textContent = '';
+}
+
+function loadFeedbackStats() {
+    const allFeedback = JSON.parse(localStorage.getItem('allFeedback')) || [];
+
+    const totalFeedback = allFeedback.length;
+    
+    const avgRating = totalFeedback > 0 
+        ? (allFeedback.reduce((sum, f) => sum + parseInt(f.rating), 0) / totalFeedback).toFixed(1)
+        : '0';
+
+    // Find most common category
+    const categoryCount = {};
+    allFeedback.forEach(f => {
+        categoryCount[f.category] = (categoryCount[f.category] || 0) + 1;
+    });
+    
+    const commonCategory = Object.keys(categoryCount).length > 0
+        ? Object.keys(categoryCount).reduce((a, b) => categoryCount[a] > categoryCount[b] ? a : b)
+        : '-';
+
+    const categoryEmojis = {
+        suggestion: '💡 Suggestion',
+        content: '📚 Content',
+        design: '🎨 Design',
+        bug: '🐛 Bug',
+        feature: '✨ Feature',
+        other: '📝 Other'
+    };
+
+    // Update stats display
+    document.getElementById('totalFeedback').textContent = totalFeedback;
+    document.getElementById('avgRating').textContent = avgRating + '⭐';
+    document.getElementById('commonCategory').textContent = categoryEmojis[commonCategory] || '-';
 }
